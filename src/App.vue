@@ -16,7 +16,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 }
 body {
   background-color: currentColor;
-  color: #fff;
+  color: #00a388;
 }
 a {
   color: peachpuff;
@@ -29,7 +29,7 @@ button {
   background: none;
   cursor: pointer;
 
-  background-color: #f49cf8;
+  background-color: #5b4342;
   font-size: 1.125rem;
 
   color: #fae7e7;
