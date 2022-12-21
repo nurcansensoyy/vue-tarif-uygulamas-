@@ -4,7 +4,17 @@
     <button @click="togglePopup">Yeni Tarif Ekle</button>
 
     <div class="tarifler">
-      <!-- Tarifler -->
+      <div
+        class="kart"
+        v-for="tarif in $store.state.tarifler"
+        :key="tarif.slug"
+      >
+        <h2>{{ tarif.title }}</h2>
+        <p>{{ tarif.aciklama }}</p>
+        <router-link :to="`/tarif/${tarif.slug}`">
+          <button>Tarifi Görüntüle</button>
+        </router-link>
+      </div>
     </div>
     <div class="popup" v-if="popupAcik">
       <div class="popup-icerik">
