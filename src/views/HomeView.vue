@@ -9,19 +9,32 @@
     <div class="tarif-popup">
       <div class="popup-konu">
         <h2>Yeni Tarif Ekle</h2>
-        <form @submit.prevent=""></form>
-        <div class="grup">
-          <label>Başlık</label>
-          <input type="text" />
-        </div>
-        <div class="grup">
-          <label>Açıklama</label>
-          <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div class="grup">
-          <label>İçindekiler</label>
-          <input type="text" />
-        </div>
+        <form @submit.prevent="">
+          <div class="grup">
+            <label>Başlık</label>
+            <input type="text" />
+          </div>
+          <div class="grup">
+            <label>Açıklama</label>
+            <textarea></textarea>
+          </div>
+          <div class="grup">
+            <label>İçindekiler</label>
+            <div class="icindekiler">
+              <input type="text" />
+              <button type="button">Malzeme Ekle</button>
+            </div>
+          </div>
+          <div class="grup">
+            <label>Yapımı</label>
+            <div class="yapimi">
+              <textarea></textarea>
+            </div>
+            <button type="button">Adım Ekle</button>
+          </div>
+          <button type="submit">Tarif Ekle</button>
+          <button type="button">Kapat</button>
+        </form>
       </div>
     </div>
   </div>

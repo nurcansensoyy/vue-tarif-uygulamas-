@@ -12,7 +12,7 @@ import HelloWorld from "./components/HelloWorld.vue";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Fira Sans", sans-serif;
+  font-family: Blippo, fantasy;
 }
 body {
   background-color: currentColor;
@@ -29,10 +29,10 @@ button {
   background: none;
   cursor: pointer;
 
-  background-color: #faa9fe;
+  background-color: #f49cf8;
   font-size: 1.125rem;
 
-  color: #ffffff;
+  color: #fae7e7;
 
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
