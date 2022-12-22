@@ -20,6 +20,7 @@
     <div class="popup" v-if="popupAcik">
       <div class="popup-icerik">
         <h2>Yeni Tarif Ekle</h2>
+
         <form @submit.prevent="yeniTarifEkle">
           <div class="grup">
             <label>Başlık</label>
@@ -43,10 +44,7 @@
           <div class="grup">
             <label>Yapımı</label>
             <div class="yapimi" v-for="i in yeniTarif.yapimi_satir" :key="i">
-              <textarea
-                type="text"
-                v-model="yeniTarif.yapimi[x - 1]"
-              ></textarea>
+              <textarea v-model="yeniTarif.yapimi[x - 1]"></textarea>
             </div>
             <button type="button" @click="yeniAdimEkle">Adım Ekle</button>
           </div>
@@ -94,11 +92,20 @@ export default {
         .toLowerCase()
         .replace(/\s/g, "-");
 
-      if (yeniTarif.value.slug == "") {
+      if (!yeniTarif.value.slug) {
         alert("Tarif ekleyin lütfen.");
         return;
       }
       store.commit("TARIF_EKLE", { ...yeniTarif.value });
+
+      yeniTarif.value = {
+        baslik: "",
+        aciklama: "",
+        icindekiler: [],
+        yapimi: [],
+        icindekiler_satir: 1,
+        yapimi_satir: 1,
+      };
       togglePopup();
     };
     return {
