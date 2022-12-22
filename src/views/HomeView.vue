@@ -20,14 +20,14 @@
     <div class="popup" v-if="popupAcik">
       <div class="popup-icerik">
         <h2>Yeni Tarif Ekle</h2>
-        <form @submit.prevent="">
+        <form @submit.prevent="yeniTarifEkle">
           <div class="grup">
             <label>Başlık</label>
-            <input type="text" />
+            <input type="text" v-model="yeniTarif.baslik" />
           </div>
           <div class="grup">
             <label>Açıklama</label>
-            <textarea></textarea>
+            <textarea v-model="yeniTarif.aciklama"></textarea>
           </div>
           <div class="grup">
             <label>İçindekiler</label>
@@ -37,18 +37,20 @@
               :key="i"
             >
               <input type="text" v-model="yeniTarif.icindekiler[i - 1]" />
-              <button type="button" @click="yeniMalzemeEkle()">
-                Malzeme Ekle
-              </button>
             </div>
+            <button type="button" @click="yeniMalzemeEkle">Malzeme Ekle</button>
           </div>
           <div class="grup">
             <label>Yapımı</label>
-            <div class="yapimi" v-for="x in yapimi_satir" :key="x">
-              <textarea v-model="yeniTarif.yapimi[x - 1]"></textarea>
+            <div class="yapimi" v-for="i in yeniTarif.yapimi_satir" :key="i">
+              <textarea
+                type="text"
+                v-model="yeniTarif.yapimi[x - 1]"
+              ></textarea>
             </div>
             <button type="button" @click="yeniAdimEkle">Adım Ekle</button>
           </div>
+
           <button type="submit">Tarif Ekle</button>
           <button type="button" @click="togglePopup">Kapat</button>
         </form>
@@ -73,6 +75,7 @@ export default {
       yapimi_satir: 1,
     });
     const popupAcik = ref(false);
+    const store = useStore();
 
     const togglePopup = () => {
       popupAcik.value = !popupAcik.value;
@@ -85,12 +88,26 @@ export default {
     const yeniAdimEkle = () => {
       yeniTarif.value.yapimi_satir++;
     };
+
+    const yeniTarifEkle = () => {
+      yeniTarif.value.slug = yeniTarif.value.baslik
+        .toLowerCase()
+        .replace(/\s/g, "-");
+
+      if (yeniTarif.value.slug == "") {
+        alert("Tarif ekleyin lütfen.");
+        return;
+      }
+      store.commit("TARIF_EKLE", { ...yeniTarif.value });
+      togglePopup();
+    };
     return {
       yeniTarif,
       togglePopup,
       popupAcik,
       yeniMalzemeEkle,
       yeniAdimEkle,
+      yeniTarifEkle,
     };
   },
 };
