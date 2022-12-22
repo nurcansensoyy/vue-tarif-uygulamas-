@@ -9,13 +9,14 @@
         v-for="tarif in $store.state.tarifler"
         :key="tarif.slug"
       >
-        <h2>{{ tarif.title }}</h2>
+        <h2>{{ tarif.baslik }}</h2>
         <p>{{ tarif.aciklama }}</p>
         <router-link :to="`/tarif/${tarif.slug}`">
           <button>Tarifi Görüntüle</button>
         </router-link>
       </div>
     </div>
+
     <div class="popup" v-if="popupAcik">
       <div class="popup-icerik">
         <h2>Yeni Tarif Ekle</h2>
@@ -30,17 +31,23 @@
           </div>
           <div class="grup">
             <label>İçindekiler</label>
-            <div class="icindekiler">
-              <input type="text" />
-              <button type="button">Malzeme Ekle</button>
+            <div
+              class="icindekiler"
+              v-for="i in yeniTarif.icindekiler_satir"
+              :key="i"
+            >
+              <input type="text" v-model="yeniTarif.icindekiler[i - 1]" />
+              <button type="button" @click="yeniMalzemeEkle()">
+                Malzeme Ekle
+              </button>
             </div>
           </div>
           <div class="grup">
             <label>Yapımı</label>
-            <div class="yapimi">
-              <textarea></textarea>
+            <div class="yapimi" v-for="x in yapimi_satir" :key="x">
+              <textarea v-model="yeniTarif.yapimi[x - 1]"></textarea>
             </div>
-            <button type="button">Adım Ekle</button>
+            <button type="button" @click="yeniAdimEkle">Adım Ekle</button>
           </div>
           <button type="submit">Tarif Ekle</button>
           <button type="button" @click="togglePopup">Kapat</button>
@@ -52,6 +59,7 @@
 
 <script>
 import { ref } from "vue";
+import { useStore } from "Vuex";
 
 export default {
   name: "Home",
@@ -69,10 +77,20 @@ export default {
     const togglePopup = () => {
       popupAcik.value = !popupAcik.value;
     };
+
+    const yeniMalzemeEkle = () => {
+      yeniTarif.value.icindekiler_satir++;
+    };
+
+    const yeniAdimEkle = () => {
+      yeniTarif.value.yapimi_satir++;
+    };
     return {
       yeniTarif,
       togglePopup,
       popupAcik,
+      yeniMalzemeEkle,
+      yeniAdimEkle,
     };
   },
 };
@@ -94,17 +112,17 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.tarifler.kart {
+.tarifler .kart {
   padding: 1rem;
   border-radius: 5px;
   margin: 1rem;
-  background-color: #081c33;
+  background-color: #c19a92;
 }
-.tarifler.kart h2 {
+.tarifler .kart h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
-.tarifler.kart p {
+.tarifler .kart p {
   font-size: 1.125rem;
   line-height: 1.4;
   margin-bottom: 1rem;

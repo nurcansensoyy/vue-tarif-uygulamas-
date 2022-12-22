@@ -15,8 +15,8 @@ import HelloWorld from "./components/HelloWorld.vue";
   font-family: Blippo, fantasy;
 }
 body {
-  background-color: currentColor;
-  color: #00a388;
+  background-color: #d1d9d7;
+  color: #715854;
 }
 a {
   color: peachpuff;

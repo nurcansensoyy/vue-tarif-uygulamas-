@@ -1,10 +1,10 @@
-import { createStore } from "vuex";
+import { createStore } from "Vuex";
 export default createStore({
   state: {
     tarifler: [
       {
         slug: "korili-tavuk",
-        title: "Körili Tavuk",
+        baslik: "Körili Tavuk",
         aciklama: "Lezzetli sosuyla tadina doyum olmayan bir yemek",
         icindekiler: [
           "600 gram kuşbasi tavuk gogsu",
@@ -31,7 +31,7 @@ export default createStore({
       },
       {
         slug: "salcali-makarna",
-        title: "Salçalı Makarna",
+        baslik: "Salçalı Makarna",
         aciklama: "Öğrenci dostu salçalı makarna",
         icindekiler: [
           "1 paket spagetti",
@@ -58,6 +58,4 @@ export default createStore({
       state.tarifler.push(tarif);
     },
   },
-  actions: {},
-  modules: {},
 });
