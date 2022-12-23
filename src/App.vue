@@ -17,9 +17,15 @@ import HelloWorld from "./components/HelloWorld.vue";
 body {
   background-color: #d1d9d7;
   color: #715854;
+
+  background-image: url("https://images.pexels.com/photos/326281/pexels-photo-326281.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 a {
-  color: #c19a92;
+  color: black;
   text-decoration: none;
 }
 button {
@@ -29,10 +35,10 @@ button {
   background: none;
   cursor: pointer;
 
-  background-color: #5b4342;
+  background-color: #9a0113;
   font-size: 1.125rem;
 
-  color: #fae7e7;
+  color: #fcedda;
 
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;

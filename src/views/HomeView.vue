@@ -1,60 +1,64 @@
 <template>
-  <div class="home">
-    <h1>Tariflerim</h1>
-    <button @click="togglePopup">Yeni Tarif Ekle</button>
+  <body>
+    <div class="home">
+      <h1>Tariflerim</h1>
+      <button @click="togglePopup">Yeni Tarif Ekle</button>
 
-    <div class="tarifler">
-      <div
-        class="kart"
-        v-for="tarif in $store.state.tarifler"
-        :key="tarif.slug"
-      >
-        <h2>{{ tarif.baslik }}</h2>
-        <p>{{ tarif.aciklama }}</p>
-        <router-link :to="`/tarif/${tarif.slug}`">
-          <button>Tarifi Görüntüle</button>
-        </router-link>
+      <div class="tarifler">
+        <div
+          class="kart"
+          v-for="tarif in $store.state.tarifler"
+          :key="tarif.slug"
+        >
+          <h2>{{ tarif.baslik }}</h2>
+          <p>{{ tarif.aciklama }}</p>
+          <router-link :to="`/tarif/${tarif.slug}`">
+            <button>Tarifi Görüntüle</button>
+          </router-link>
+        </div>
+      </div>
+
+      <div class="popup" v-if="popupAcik">
+        <div class="popup-icerik">
+          <h2>Yeni Tarif Ekle</h2>
+
+          <form @submit.prevent="yeniTarifEkle">
+            <div class="grup">
+              <label>Başlık</label>
+              <input type="text" v-model="yeniTarif.baslik" />
+            </div>
+            <div class="grup">
+              <label>Açıklama</label>
+              <textarea v-model="yeniTarif.aciklama"></textarea>
+            </div>
+            <div class="grup">
+              <label>İçindekiler</label>
+              <div
+                class="icindekiler"
+                v-for="i in yeniTarif.icindekiler_satir"
+                :key="i"
+              >
+                <input type="text" v-model="yeniTarif.icindekiler[i - 1]" />
+              </div>
+              <button type="button" @click="yeniMalzemeEkle">
+                Malzeme Ekle
+              </button>
+            </div>
+            <div class="grup">
+              <label>Yapımı</label>
+              <div class="yapimi" v-for="i in yeniTarif.yapimi_satir" :key="i">
+                <textarea v-model="yeniTarif.yapimi[i - 1]"></textarea>
+              </div>
+              <button type="button" @click="yeniAdimEkle">Adım Ekle</button>
+            </div>
+
+            <button type="submit">Tarif Ekle</button>
+            <button type="button" @click="togglePopup">Kapat</button>
+          </form>
+        </div>
       </div>
     </div>
-
-    <div class="popup" v-if="popupAcik">
-      <div class="popup-icerik">
-        <h2>Yeni Tarif Ekle</h2>
-
-        <form @submit.prevent="yeniTarifEkle">
-          <div class="grup">
-            <label>Başlık</label>
-            <input type="text" v-model="yeniTarif.baslik" />
-          </div>
-          <div class="grup">
-            <label>Açıklama</label>
-            <textarea v-model="yeniTarif.aciklama"></textarea>
-          </div>
-          <div class="grup">
-            <label>İçindekiler</label>
-            <div
-              class="icindekiler"
-              v-for="i in yeniTarif.icindekiler_satir"
-              :key="i"
-            >
-              <input type="text" v-model="yeniTarif.icindekiler[i - 1]" />
-            </div>
-            <button type="button" @click="yeniMalzemeEkle">Malzeme Ekle</button>
-          </div>
-          <div class="grup">
-            <label>Yapımı</label>
-            <div class="yapimi" v-for="i in yeniTarif.yapimi_satir" :key="i">
-              <textarea v-model="yeniTarif.yapimi[i - 1]"></textarea>
-            </div>
-            <button type="button" @click="yeniAdimEkle">Adım Ekle</button>
-          </div>
-
-          <button type="submit">Tarif Ekle</button>
-          <button type="button" @click="togglePopup">Kapat</button>
-        </form>
-      </div>
-    </div>
-  </div>
+  </body>
 </template>
 
 <script>
@@ -125,12 +129,21 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("https://images.freeimages.com/images/premium/previews/2658/26582541-cooking-seamless-background.jpg");
+}
+.grup button {
+  background-color: #fcedda66;
+}
+body {
+  background-image: url("https://images.pexels.com/photos/326281/pexels-photo-326281.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 h1 {
   font-size: 3rem;
   margin-bottom: 32px;
-  color: #5f4b48;
+  color: #9a0113;
 }
 .tarifler {
   display: grid;
@@ -141,11 +154,12 @@ h1 {
   padding: 1rem;
   border-radius: 5px;
   margin: 1rem;
-  background-color: #e8cbc6;
+  background-color: #fcedda;
 }
 .tarifler .kart h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #9a0113;
 }
 .tarifler .kart p {
   font-size: 1.125rem;
@@ -158,20 +172,24 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #d1d9d7;
+  background-image: url("https://images.pexels.com/photos/326281/pexels-photo-326281.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .popup .popup-icerik {
-  background-color: #c19a92;
+  background-color: #9a0113;
   padding: 2rem;
   border-radius: 1rem;
   width: 100%;
   max-width: 768px;
 }
 .popup-icerik h2 {
-  color: #715854;
+  color: #fcedda;
   font-size: 2rem;
   margin-bottom: 1rem;
 }
@@ -182,7 +200,7 @@ h1 {
 .popup-icerik .grup label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #715854;
+  color: #fcedda;
 }
 
 .popup-icerik .grup input,
