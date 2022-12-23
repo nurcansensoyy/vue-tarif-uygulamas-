@@ -19,7 +19,7 @@ body {
   color: #715854;
 }
 a {
-  color: peachpuff;
+  color: #c19a92;
   text-decoration: none;
 }
 button {
