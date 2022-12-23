@@ -54,7 +54,7 @@ export default createStore({
     ],
   },
   mutations: {
-    tarif_ekle(state, tarif) {
+    TARIF_EKLE(state, tarif) {
       state.tarifler.push(tarif);
     },
   },

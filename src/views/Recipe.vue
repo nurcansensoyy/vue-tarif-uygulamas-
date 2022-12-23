@@ -28,7 +28,7 @@ export default {
   computed: {
     tarif() {
       return this.$store.state.tarifler.find(
-        (recipe) => recipe.slug === this.$route.params.slug
+        (tarif) => tarif.slug === this.$route.params.slug
       );
     },
   },

@@ -44,7 +44,7 @@
           <div class="grup">
             <label>Yapımı</label>
             <div class="yapimi" v-for="i in yeniTarif.yapimi_satir" :key="i">
-              <textarea v-model="yeniTarif.yapimi[x - 1]"></textarea>
+              <textarea v-model="yeniTarif.yapimi[i - 1]"></textarea>
             </div>
             <button type="button" @click="yeniAdimEkle">Adım Ekle</button>
           </div>
@@ -93,7 +93,7 @@ export default {
         .replace(/\s/g, "-");
 
       if (!yeniTarif.value.slug) {
-        alert("Tarif ekleyin lütfen.");
+        alert("Başlık ekleyin lütfen.");
         return;
       }
       store.commit("TARIF_EKLE", { ...yeniTarif.value });
@@ -125,11 +125,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("https://images.freeimages.com/images/premium/previews/2658/26582541-cooking-seamless-background.jpg");
 }
-
 h1 {
   font-size: 3rem;
   margin-bottom: 32px;
+  color: #5f4b48;
 }
 .tarifler {
   display: grid;
@@ -140,7 +141,7 @@ h1 {
   padding: 1rem;
   border-radius: 5px;
   margin: 1rem;
-  background-color: #c19a92;
+  background-color: #e8cbc6;
 }
 .tarifler .kart h2 {
   font-size: 2rem;
